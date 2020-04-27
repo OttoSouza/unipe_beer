@@ -3,11 +3,9 @@ import Header from "../../components/Header";
 import { Paper, Typography, Link } from "@material-ui/core";
 
 import HomeStyles from './styles.js'
-import TableDependicies from "../../components/TableDependicies";
+import TableDependicies from "../../components/TableDependencies";
 import MainContainer from "../../components/MainContainer";
 import Footer from "../../components/Footer";
-
-// import { Container } from './styles';
 
 export default function Home() {
 

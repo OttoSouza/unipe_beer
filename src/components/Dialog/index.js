@@ -1,113 +1,75 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { IconButton, InputAdornment, makeStyles } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import { IconButton, Paper, Typography } from '@material-ui/core';
+import DialogStyles from './styles';
 
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-    width: '100%'
-  },
-  img: {
-    height: '30vh',
-    width: '30wh',
-  }
-}));
+
 
 export default function Details({ beer }) {
-  const classes = useStyles();
+  const classes = DialogStyles();
   const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = React.useState('paper');
 
-  const [oneBeer] = useState({
-    name: beer.name,
-    description: beer.description,
-    tagline: beer.tagline,
-    first_brewed: beer.first_brewed,
-    yeast: beer.ingredients.yeast,
-    imagem: beer.image_url,
-  })
+  const malts = beer.ingredients.malt.map((malt, index) => (
+    <React.Fragment key={index}>
+      <Typography className={classes.subtitles}>{malt.name}</Typography>
+      <Typography className={classes.subtitles}>{malt.amount.value} {malt.amount.unit}</Typography>
+    </React.Fragment>
+  ))
 
-  const handleClickOpen = () => {
+  const hops = beer.ingredients.hops.map((hops, index) => (
+    <React.Fragment key={index}>
+      <Typography className={classes.subtitles}>{hops.name}</Typography>
+      <Typography className={classes.subtitles}>{hops.amount.value} {hops.amount.unit}</Typography>
+      <Typography className={classes.subtitles}>{hops.add} </Typography>
+      <Typography className={classes.subtitles}>{hops.attribute} </Typography>
+    </React.Fragment>
+  ))
+
+  const handleClickOpen = (scrollType) => () => {
     setOpen(true);
+    setScroll(scrollType);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
 
+
+
   return (
     <>
-      <IconButton color="inherit" onClick={handleClickOpen}>
+      <IconButton color="inherit" onClick={handleClickOpen('paper')}>
         <MoreHorizIcon style={{ color: "#e02041" }} />
       </IconButton>
-
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle style={{ textAlign: 'center' }}><img className={classes.img} src={oneBeer.imagem} alt={oneBeer.name} /></DialogTitle>
+      <Dialog open={open} onClose={handleClose} scroll={scroll}>
+        <DialogTitle style={{ textAlign: 'center' }}><img className={classes.img} src={beer.image_url} alt={beer.name} /></DialogTitle>
         <DialogContent>
           <DialogContentText>
-            {oneBeer.description}
+            {beer.description}
           </DialogContentText>
-          <TextField
-            className={classes.margin}
-            label='Name'
-            placeholder={oneBeer.name}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            className={classes.margin}
-            label='TagLine'
-            placeholder={oneBeer.tagline}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            className={classes.margin}
-            label='First Brewed'
-            placeholder={oneBeer.first_brewed}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            className={classes.margin}
-            label='Yeast'
-            placeholder={oneBeer.yeast}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <AccountCircle />
-                </InputAdornment>
-              ),
-            }}
-          />
+          <Paper className={classes.paperContainer}>
+            <Typography className={classes.title}>Basic Informations</Typography>
+            <Typography className={classes.subtitles}> <strong>Name</strong> {beer.name}</Typography>
+            <Typography className={classes.subtitles}> <strong>TagLine</strong> {beer.tagline}</Typography>
+            <Typography className={classes.subtitles}> <strong>First Brewed</strong> {beer.first_brewed}</Typography>
+            <Typography className={classes.title}>Malts</Typography>
+            {malts}
+            <Typography className={classes.title}>Holps</Typography>
+            {hops}
+            <Typography className={classes.subtitles}>{beer.ingredients.yeast}</Typography>
+          </Paper>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
           </Button>
         </DialogActions>
       </Dialog>

@@ -3,7 +3,7 @@ import MainContainer from "../../components/MainContainer";
 import Header from "../../components/Header";
 import TableBeers from "../../components/TableBeers";
 import Footer from "../../components/Footer";
-// import { Container } from './styles';
+
 import api from '../../services/api'
 export default function Beers() {
     const [beers, setBeers] = useState([]);
