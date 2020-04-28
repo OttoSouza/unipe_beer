@@ -44,7 +44,7 @@ export default function About() {
         </Paper>
         <Paper className={classes.paper}>
           <Typography className={classes.title}>
-            Unipe
+            College
         </Typography>
           <Typography className={classes.subtitles}>
             <SchoolIcon className={classes.icon} /> Unipe - PostGraduate

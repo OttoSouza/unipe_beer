@@ -13,14 +13,12 @@ const AboutStyles = makeStyles({
         marginBottom: '20px',
         width: '70%',
         padding: '10px',
-
     },
 
     principal: {
         fontWeight: 'bold',
         fontSize: '20px',
         textAlign: 'center',
-
     },
 
     title: {
@@ -34,8 +32,8 @@ const AboutStyles = makeStyles({
         fontSize: '15px',
         marginLeft: '20px', 
         display: 'flex'
-
     },
+    
     icon: {
         paddingRight: '5px'
     }

@@ -18,7 +18,7 @@ export default function TableBeers({ beers }) {
         {beer.name}
       </TableCell>
       <TableCell align="right">{beer.tagline}</TableCell>
-      <TableCell align="right">{beer.image_url}</TableCell>
+      <TableCell align="right"> {beer.image_url}</TableCell>
       <TableCell align="right">
         <Details beer={beer} />
       </TableCell>
