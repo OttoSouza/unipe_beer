@@ -4,13 +4,21 @@ import Header from "../../components/Header";
 import TableBeers from "../../components/TableBeers";
 import Footer from "../../components/Footer";
 
-import api from '../../services/api'
+import { get } from '../../services/api'
+
+import TablePagination from '../../components/Pagination';
 export default function Beers() {
     const [beers, setBeers] = useState([]);
+    const [currentPage, setCurrentPag] = useState(1);
+    const [beerPerPage] = useState(5);
+
+    const indexLastBeer = currentPage * beerPerPage;
+    const indexFistBeer = indexLastBeer - beerPerPage;
+    const currentBeers = beers.slice(indexFistBeer, indexLastBeer);
 
     useEffect(() => {
         const fetchBeers = async () => {
-            await api.get('/beers').then(response => {
+            await get.then(response => {
                 setBeers(response.data);
             }).catch(err => {
                 alert('alguma coisa de errada nao esta certa')
@@ -18,11 +26,18 @@ export default function Beers() {
         }
         fetchBeers()
     }, [])
+
+    const handleChangePage = (event, number) => {
+        setCurrentPag(number);
+    };
+
+
     return (
         <MainContainer>
             <Header />
-            <TableBeers  beers={beers}/>
-            <Footer  />
+            <TableBeers beers={currentBeers} />
+            <TablePagination beerPerPage={beerPerPage} total={beers.length} changePage={handleChangePage} />
+            <Footer />
         </MainContainer>
     );
 }

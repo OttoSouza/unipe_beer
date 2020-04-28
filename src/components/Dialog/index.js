@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { IconButton, Paper, Typography } from '@material-ui/core';
+import { IconButton, Paper, Typography, } from '@material-ui/core';
 import DialogStyles from './styles';
 
 
@@ -18,19 +18,21 @@ export default function Details({ beer }) {
   const [scroll, setScroll] = React.useState('paper');
 
   const malts = beer.ingredients.malt.map((malt, index) => (
-    <React.Fragment key={index}>
-      <Typography className={classes.subtitles}>{malt.name}</Typography>
-      <Typography className={classes.subtitles}>{malt.amount.value} {malt.amount.unit}</Typography>
-    </React.Fragment>
+
+    <div key={index} className={classes.ingredientsContainer}>
+      <Typography className={classes.subtitles}><strong>Name</strong> {malt.name}</Typography>
+      <Typography className={classes.subtitles}><strong>Amount</strong> {malt.amount.value} {malt.amount.unit}</Typography>
+    </div>
+
   ))
 
   const hops = beer.ingredients.hops.map((hops, index) => (
-    <React.Fragment key={index}>
-      <Typography className={classes.subtitles}>{hops.name}</Typography>
-      <Typography className={classes.subtitles}>{hops.amount.value} {hops.amount.unit}</Typography>
-      <Typography className={classes.subtitles}>{hops.add} </Typography>
-      <Typography className={classes.subtitles}>{hops.attribute} </Typography>
-    </React.Fragment>
+    <div key={index} className={classes.ingredientsContainer}>
+      <Typography className={classes.subtitles}><strong>Name</strong> {hops.name}</Typography>
+      <Typography className={classes.subtitles}><strong>Amount</strong> {`${hops.amount.value} ${hops.amount.unit}`}</Typography>
+      <Typography className={classes.subtitles}><strong>Add</strong> {hops.add} </Typography>
+      <Typography className={classes.subtitles}><strong>Attribute</strong> {hops.attribute} </Typography>
+    </div>
   ))
 
   const handleClickOpen = (scrollType) => () => {
@@ -52,23 +54,26 @@ export default function Details({ beer }) {
       <Dialog open={open} onClose={handleClose} scroll={scroll}>
         <DialogTitle style={{ textAlign: 'center' }}><img className={classes.img} src={beer.image_url} alt={beer.name} /></DialogTitle>
         <DialogContent>
-          <DialogContentText>
+          <DialogContentText style={{ textAlign: 'justify' }}>
             {beer.description}
           </DialogContentText>
-          <Paper className={classes.paperContainer}>
+          <Paper className={classes.paperContainer} >
+
             <Typography className={classes.title}>Basic Informations</Typography>
-            <Typography className={classes.subtitles}> <strong>Name</strong> {beer.name}</Typography>
-            <Typography className={classes.subtitles}> <strong>TagLine</strong> {beer.tagline}</Typography>
-            <Typography className={classes.subtitles}> <strong>First Brewed</strong> {beer.first_brewed}</Typography>
+            <Typography className={classes.subtitles}><strong>Name</strong> {beer.name}</Typography>
+            <Typography className={classes.subtitles}><strong>TagLine</strong> {beer.tagline}</Typography>
+            <Typography className={classes.subtitles}><strong>First Brewed</strong> {beer.first_brewed}</Typography>
             <Typography className={classes.title}>Malts</Typography>
             {malts}
             <Typography className={classes.title}>Holps</Typography>
             {hops}
-            <Typography className={classes.subtitles}>{beer.ingredients.yeast}</Typography>
+            <Typography className={classes.title}>Yeast</Typography>
+            <Typography className={classes.subtitles}><strong>Name</strong> {beer.ingredients.yeast}</Typography>
           </Paper>
+          
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={handleClose} className={classes.button} variant='contained'>
             Cancel
           </Button>
         </DialogActions>

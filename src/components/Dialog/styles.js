@@ -1,29 +1,39 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const DialogStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-    width: '100%'
-  },
   img: {
-    height: '30vh',
-    width: '30wh',
+    height: '25vh',
+    width: '25wh',
   },
-  paperContainer : {
-    padding: '10px'
+
+  paperContainer: {
+    padding: '5px',
+    width: '100%'
   },
 
   title: {
     fontSize: '20px',
     fontWeight: 'bold',
-    marginLeft: '10px',
-    marginBottom: '5px'
+    margin: '0 0 5px 10px',
+    paddingBottom: '5px',
+    borderBottom: `2px solid ${theme.palette.divider}`,
+    color: '#650000',
   },
 
   subtitles: {
-    fontSize: '15px',
-    marginLeft: '20px',
-    marginBottom: '5px'
+    fontSize: '14px',
+    margin: '0 0 5px 20px',
+    paddingBottom: '5px',
+  },
+
+  ingredientsContainer: {
+    display: 'flex',
+
+  },
+  button: {
+    color: '#fff',
+    background: '#e02041'
+
   }
 }));
 

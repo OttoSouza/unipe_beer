@@ -15,6 +15,7 @@ const rows = [
     createData('react-router-dom', 'yarn add react-router-dom'),
     createData('material core', 'yarn add @material-ui/core'),
     createData('material icons', 'yarn add @material-ui/icons'),
+    createData('material lab - Pagination', 'yarn add @material-ui/lab'),
     createData('react-icons', 'yarn add react-icons'),
 ];
 

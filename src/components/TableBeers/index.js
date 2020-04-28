@@ -17,9 +17,9 @@ export default function TableBeers({ beers }) {
       <TableCell component="th" scope="row">
         {beer.name}
       </TableCell>
-      <TableCell align="left">{beer.tagline}</TableCell>
-      <TableCell align="justify">{beer.image_url}</TableCell>
-      <TableCell align="justify">
+      <TableCell align="right">{beer.tagline}</TableCell>
+      <TableCell align="right">{beer.image_url}</TableCell>
+      <TableCell align="right">
         <Details beer={beer} />
       </TableCell>
     </TableRow>
@@ -32,9 +32,9 @@ export default function TableBeers({ beers }) {
           <TableHead>
             <TableRow>
               <TableCell >Name</TableCell>
-              <TableCell align="left">TagLine</TableCell>
-              <TableCell align="justify">Imagem</TableCell>
-              <TableCell align="right">Actions</TableCell>
+              <TableCell align="right">TagLine</TableCell>
+              <TableCell align="right">Imagem</TableCell>
+              <TableCell align="right">More Informations</TableCell>
             </TableRow>
           </TableHead>
           <TableBody className={classes.test}>{row}</TableBody>
